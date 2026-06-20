@@ -35,7 +35,7 @@ class MediScanPDF(FPDF):
     def header(self):
         self.set_font(_FONT_NAME, "B", 14)
         self.set_text_color(30, 120, 180)
-        self.cell(0, 10, "MediScan AI \u2014 Health Report Summary", align="C",
+        self.cell(0, 10, "MediScan AI -- Health Report Summary", align="C",
                   new_x="LMARGIN", new_y="NEXT")
         self.set_font(_FONT_NAME, "", 9)
         self.set_text_color(120, 120, 120)
@@ -52,7 +52,7 @@ class MediScanPDF(FPDF):
         self.set_y(-15)
         self.set_font(_FONT_NAME, "I", 8)
         self.set_text_color(150, 150, 150)
-        self.cell(0, 10, f"Page {self.page_no()} | MediScan AI \u2014 Not Medical Advice",
+        self.cell(0, 10, f"Page {self.page_no()} | MediScan AI -- Not Medical Advice",
                   align="C")
 
 
@@ -65,12 +65,13 @@ def _safe(text: str) -> str:
     if not text:
         return ""
     text = str(text)
+    # Always strip control characters (both Arial and Helvetica modes)
+    text = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]", "", text)
     if _USE_ARIAL:
-        # Arial supports Unicode — just remove control characters
-        text = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]", "", text)
+        # Arial supports Unicode natively — no further conversion needed
         return text
     else:
-        # Helvetica fallback — full ASCII-safe conversion
+        # Helvetica fallback — convert common Unicode to ASCII equivalents
         replacements = {
             "\u2019": "'", "\u2018": "'", "\u201c": '"', "\u201d": '"',
             "\u2013": "-", "\u2014": "--", "\u2015": "--",
