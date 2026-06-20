@@ -1,0 +1,230 @@
+==============================================================================
+MEDISCAN AI — MEDICAL TERMINOLOGY TO PLAIN ENGLISH MAPPING
+==============================================================================
+
+--- BLOOD TESTS / CBC ---
+
+Hemoglobin (Hb / Haemoglobin):
+  Plain: The protein in red blood cells that carries oxygen from your lungs to the rest of your body.
+  Low: Your blood may not be carrying enough oxygen. You might feel tired, breathless, or dizzy. Often means anemia.
+  High: Blood is thicker than usual, which can increase clotting risk.
+
+RBC / Red Blood Cell Count:
+  Plain: The number of red blood cells in your blood. Red blood cells carry oxygen throughout your body.
+  Low: Anemia — your body has fewer oxygen carriers than needed.
+  High: Too many red cells — blood may be thicker, higher clotting risk.
+
+WBC / White Blood Cell Count / TLC (Total Leukocyte Count):
+  Plain: Counts your immune system cells — the fighters that protect you against infections.
+  Low: Your immune system may be weakened. You could be more vulnerable to infections.
+  High: Your body is fighting something — could be infection, inflammation, or stress.
+
+Platelets / PLT (Thrombocytes):
+  Plain: Tiny cells that help your blood clot when you have a cut or injury.
+  Low: Blood may take longer to clot. Risk of unusual bruising or bleeding.
+  High: Blood may clot more than needed, increasing risk of clots in vessels.
+
+Hematocrit (HCT / PCV — Packed Cell Volume):
+  Plain: The percentage of your blood that is made up of red blood cells.
+
+MCV (Mean Corpuscular Volume):
+  Plain: The average size of your red blood cells.
+  Low: Small red blood cells — often iron deficiency or thalassemia.
+  High: Large red blood cells — often B12 or folate deficiency.
+
+MCH (Mean Corpuscular Hemoglobin):
+  Plain: How much hemoglobin is in each red blood cell on average.
+
+MCHC (Mean Corpuscular Hemoglobin Concentration):
+  Plain: How concentrated the hemoglobin is in each red blood cell.
+
+RDW (Red Cell Distribution Width):
+  Plain: Measures how different in size your red blood cells are. Higher variation can indicate nutritional deficiencies.
+
+Neutrophils:
+  Plain: The most common white blood cells. First responders against bacterial infections.
+  High: Active bacterial infection or inflammation.
+  Low: Increased infection risk — neutropenia.
+
+Lymphocytes:
+  Plain: White blood cells that fight viral infections and produce antibodies.
+  High: Often seen with viral infections (like flu, COVID-19).
+  Low: May indicate immune system suppression.
+
+Monocytes:
+  Plain: White blood cells that clean up dead cells and fight chronic infections.
+
+Eosinophils:
+  Plain: White blood cells involved in allergic reactions and fighting parasites.
+  High: Allergic reaction, asthma, or parasitic infection.
+
+Basophils:
+  Plain: White blood cells involved in allergic responses.
+
+--- CHOLESTEROL / LIPIDS ---
+
+Total Cholesterol:
+  Plain: The total amount of fatty substances (cholesterol) in your blood. Some is necessary, but too much increases heart risk.
+
+LDL Cholesterol (Low-Density Lipoprotein):
+  Plain: Often called "bad" cholesterol. High levels cause fatty deposits in blood vessels, narrowing them over time.
+  High: Increased risk of heart attack and stroke.
+
+HDL Cholesterol (High-Density Lipoprotein):
+  Plain: The "good" cholesterol. It actually removes other forms of cholesterol from your bloodstream.
+  Low: Less protection against heart disease.
+  High: Protective — lowers heart disease risk.
+
+Triglycerides:
+  Plain: A type of fat found in your blood. Your body converts excess calories and sugar into triglycerides stored in fat cells.
+  High: Increased risk of heart disease. Often linked to high sugar/carb diet, alcohol use, or diabetes.
+
+VLDL (Very Low-Density Lipoprotein):
+  Plain: Carries triglycerides in the blood. Similar to LDL, high VLDL contributes to artery narrowing.
+
+Non-HDL Cholesterol:
+  Plain: All the harmful cholesterol types combined (Total minus the "good" HDL).
+
+--- BLOOD GLUCOSE ---
+
+Fasting Blood Glucose (FBG / FBS):
+  Plain: Your blood sugar level after not eating for at least 8 hours. The most common diabetes screening test.
+
+HbA1c (Glycated Hemoglobin / A1c):
+  Plain: Shows your average blood sugar level over the past 2-3 months. The gold standard for diagnosing and monitoring diabetes.
+
+Post-Prandial Glucose (PPG / PPBS):
+  Plain: Your blood sugar measured 2 hours after a meal. Checks how well your body handles sugar from food.
+
+Random Blood Glucose:
+  Plain: Blood sugar measured at any time of day, regardless of last meal.
+
+Insulin (Fasting):
+  Plain: The hormone produced by your pancreas that helps cells absorb sugar from the blood.
+
+--- KIDNEY FUNCTION ---
+
+Creatinine (Serum Creatinine):
+  Plain: A waste product from normal muscle activity that healthy kidneys filter out. High levels suggest the kidneys are struggling.
+
+BUN (Blood Urea Nitrogen):
+  Plain: Urea is a waste product from protein breakdown. High BUN means kidneys aren't clearing waste efficiently.
+
+eGFR (Estimated Glomerular Filtration Rate):
+  Plain: A calculated score showing how well your kidneys are filtering your blood per minute. The most important kidney function number.
+
+Uric Acid:
+  Plain: A waste product from breaking down purines (found in red meat, seafood, alcohol). High levels can crystallize in joints causing gout, or form kidney stones.
+
+Sodium (Na):
+  Plain: An electrolyte that controls fluid balance, blood pressure, and nerve signals.
+
+Potassium (K):
+  Plain: An electrolyte crucial for heart rhythm and muscle function. Both too high and too low can be dangerous for the heart.
+
+Chloride (Cl):
+  Plain: An electrolyte that works with sodium to maintain fluid balance and pH.
+
+Bicarbonate (HCO3):
+  Plain: Helps maintain the acid-base balance of your blood.
+
+Calcium (Ca):
+  Plain: Essential for bones, teeth, muscle function, and nerve signals.
+
+Phosphorus:
+  Plain: Works with calcium for bone health. Kidneys help regulate phosphorus levels.
+
+--- LIVER FUNCTION ---
+
+SGPT / ALT (Alanine Aminotransferase):
+  Plain: An enzyme found mainly in liver cells. When liver cells are damaged, ALT leaks into the blood. The most specific liver health marker.
+  High: Liver cell damage — possible fatty liver, hepatitis, or medication effect.
+
+SGOT / AST (Aspartate Aminotransferase):
+  Plain: An enzyme found in the liver and heart. Less specific than ALT — raised in both liver and heart conditions.
+
+ALP (Alkaline Phosphatase):
+  Plain: An enzyme found in the liver, bile ducts, and bones. High levels suggest bile duct blockage or bone disease.
+
+GGT / Gamma-GT (Gamma-Glutamyl Transferase):
+  Plain: A liver enzyme. Particularly sensitive to alcohol use and bile duct problems.
+  High: Alcohol use, bile duct issues, or fatty liver.
+
+Total Bilirubin:
+  Plain: A yellow pigment made when red blood cells break down. High levels cause jaundice (yellowing of skin/eyes). Liver and bile ducts normally clear bilirubin.
+
+Direct Bilirubin:
+  Plain: The water-soluble form of bilirubin processed by the liver. High = liver or bile duct problem.
+
+Indirect Bilirubin:
+  Plain: Bilirubin before the liver processes it. High = rapid breakdown of red blood cells (hemolysis).
+
+Total Protein:
+  Plain: Measures all proteins in your blood — including albumin and globulins. Proteins are essential for immunity, fluid balance, and tissue repair.
+
+Albumin:
+  Plain: The main protein in blood. Made by the liver. Helps keep fluid in blood vessels and carries nutrients and medications. Low levels suggest liver or kidney problems, or malnutrition.
+
+Globulin:
+  Plain: A group of proteins including immune antibodies. High levels may indicate chronic infection or immune disorders.
+
+--- THYROID ---
+
+TSH (Thyroid Stimulating Hormone):
+  Plain: A hormone from the brain (pituitary gland) that tells the thyroid how much hormone to make. The single best test for thyroid function.
+  High TSH: Thyroid is underactive (hypothyroidism). Brain is shouting at the thyroid to produce more.
+  Low TSH: Thyroid is overactive (hyperthyroidism). Brain is pulling back because too much thyroid hormone is circulating.
+
+Free T4 (Thyroxine):
+  Plain: The main hormone made by the thyroid gland. Controls metabolism, energy, heart rate, and body temperature.
+  Low: Hypothyroidism — sluggish metabolism, fatigue, weight gain.
+  High: Hyperthyroidism — fast metabolism, weight loss, anxiety.
+
+Free T3 (Triiodothyronine):
+  Plain: The active form of thyroid hormone. T4 is converted into T3 in the body's tissues.
+
+--- IRON STUDIES ---
+
+Serum Iron:
+  Plain: The amount of iron in your blood available for use.
+
+TIBC (Total Iron Binding Capacity):
+  Plain: Measures how much iron your blood could carry — reflects transferrin protein levels. High TIBC means your body is hungry for more iron.
+
+Ferritin:
+  Plain: The protein that stores iron in your cells. The best measure of iron reserves in your body.
+  Low: Iron stores are depleted — iron deficiency anemia likely.
+  High: Could indicate infection, inflammation, or iron overload (not always bad).
+
+Transferrin Saturation:
+  Plain: What percentage of your iron-carrying protein (transferrin) is actually loaded with iron.
+
+--- VITAMINS ---
+
+Vitamin D (25-OH Vitamin D):
+  Plain: The sunshine vitamin. Essential for bone health, immunity, and muscle function. Most Indians are deficient due to indoor lifestyles despite strong sunlight.
+  Deficient: Risk of weak bones, low immunity, fatigue, depression.
+
+Vitamin B12 (Cobalamin):
+  Plain: Essential for nerve function, DNA production, and red blood cell formation. Vegetarians and vegans often have low B12 since it is mainly found in animal products.
+  Low: Nerve damage, anemia, brain fog, tingling in hands/feet.
+
+Folic Acid / Folate:
+  Plain: A B-vitamin essential for DNA synthesis and red blood cell production. Critically important during pregnancy for baby's brain and spine development.
+
+--- CARDIAC MARKERS ---
+
+Troponin T/I:
+  Plain: Proteins released when heart muscle is damaged. The most important marker for diagnosing a heart attack.
+
+CRP (C-Reactive Protein):
+  Plain: A protein made by the liver when inflammation is present in the body.
+  High: Indicates active inflammation — infection, injury, or chronic inflammatory disease.
+
+hsCRP (High-Sensitivity CRP):
+  Plain: Ultra-sensitive CRP test used to assess heart disease risk even when inflammation is mild.
+
+LDH (Lactate Dehydrogenase):
+  Plain: An enzyme released when cells are damaged in the heart, liver, kidneys, or muscles.
+
+==============================================================================

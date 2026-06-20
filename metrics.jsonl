@@ -1,0 +1,1 @@
+{"timestamp": "2026-06-20T01:20:57.464704", "total_seconds": 43.33, "node_timings": {"extract": 1.88, "rag": 0.02, "calculate": 0.0, "research": 13.95, "crew": 14.59, "judge": 12.88}, "tests_found": 16, "abnormal_count": 0, "judge_iterations": 2, "status": "success"}

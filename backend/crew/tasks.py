@@ -1,0 +1,177 @@
+"""
+MediScan AI — CrewAI Tasks + Crew Runner
+Sequential crew: Explainer → Report Architect.
+Called from the crew_node in LangGraph.
+"""
+
+import time
+import litellm
+from crewai import Task, Crew, Process
+
+from backend.crew.agents import get_explainer_agent, get_report_architect_agent
+
+# Ensure drop_params is set here too (in case agents.py not imported first)
+litellm.drop_params = True
+litellm.cache = None
+
+
+def _build_context_string(
+    all_tests: list,
+    calculated_metrics: list,
+    research_context: dict,
+    judge_feedback: str,
+    patient_name: str,
+    patient_age: int,
+    patient_sex: str,
+) -> str:
+    """Builds a compact, structured context string for the crew. Keeps token count reasonable."""
+
+    lines = [f"Patient: {patient_name}, Age: {patient_age}, Sex: {patient_sex}\n"]
+
+    lines.append("=== LAB TEST RESULTS ===")
+    for t in all_tests[:30]:  # max 30 tests to keep tokens safe
+        flag = t.get("flag", "")
+        status = ""
+        if flag.upper() in ("H", "HIGH", "CR", "CRITICAL"):
+            status = "⚠️ HIGH"
+        elif flag.upper() in ("L", "LOW"):
+            status = "⚠️ LOW"
+        elif flag.upper() == "BORDERLINE":
+            status = "⚡ BORDERLINE"
+        else:
+            status = "✅ NORMAL"
+
+        ref = t.get("reference_range", "")
+        ref_str = f" [Ref: {ref}]" if ref else ""
+        lines.append(f"- {t.get('test_name')}: {t.get('value')} {t.get('unit')} {status}{ref_str}")
+
+    if calculated_metrics:
+        lines.append("\n=== CALCULATED METRICS ===")
+        for m in calculated_metrics:
+            lines.append(f"- {m.get('name')}: {m.get('value')} {m.get('unit')} → {m.get('interpretation')}")
+
+    if research_context:
+        lines.append("\n=== RESEARCH CONTEXT (for abnormal values) ===")
+        for test_name, context in list(research_context.items())[:5]:
+            lines.append(f"- {test_name}: {context[:200]}")
+
+    if judge_feedback and judge_feedback not in ("None", "None — first attempt", ""):
+        lines.append(f"\n=== PREVIOUS JUDGE FEEDBACK (must address) ===\n{judge_feedback}")
+
+    return "\n".join(lines)
+
+
+def run_crew(
+    all_tests: list,
+    calculated_metrics: list,
+    research_context: dict,
+    judge_feedback: str,
+    patient_name: str,
+    patient_age: int,
+    patient_sex: str,
+) -> str:
+    """
+    Runs the 2-agent sequential crew.
+    Returns the final structured report as a string.
+    """
+    context = _build_context_string(
+        all_tests, calculated_metrics, research_context,
+        judge_feedback, patient_name, patient_age, patient_sex
+    )
+
+    explainer = get_explainer_agent()
+    architect = get_report_architect_agent()
+
+    # Build explicit list of ALL flagged tests that judge will check
+    flagged_must_cover = []
+    for t in all_tests:
+        flag = t.get("flag", "")
+        if flag.upper() in ("H", "HIGH", "L", "LOW", "CR", "CRITICAL", "BORDERLINE"):
+            flagged_must_cover.append(
+                f"  - {t.get('test_name')}: {t.get('value')} {t.get('unit')} [{flag.upper()}]"
+            )
+    must_cover_str = "\n".join(flagged_must_cover) if flagged_must_cover else "  None"
+
+    explain_task = Task(
+        description=f"""You have been given a patient's lab test results.
+
+{context}
+
+CRITICAL REQUIREMENT — You MUST explicitly explain EVERY test in this list:
+{must_cover_str}
+
+Do NOT skip any of the above. The validator will reject your output if any are missing.
+
+Your job for EACH test (normal and abnormal):
+1. What does this test measure? (1 sentence)
+2. What does this result mean for this patient? (1-2 sentences)
+3. If flagged H or L: what might be causing this? (2-3 possible reasons)
+4. For normal values: brief reassurance (1 sentence is enough)
+
+Rules:
+- Use ZERO unexplained medical jargon
+- Be empathetic and informative, not alarming
+- Format as a clear numbered/bulleted list per test""",
+        agent=explainer,
+        expected_output="Plain-English explanation for EVERY lab test result — no test skipped",
+    )
+
+    report_task = Task(
+        description="""Using the explanations from the Medical Content Writer, create a complete structured health report.
+
+The report must have these exact sections:
+
+SECTION 1 — SUMMARY
+- Brief overview (2-3 sentences about overall findings)
+- Quick stats: X tests analyzed, Y need attention
+
+SECTION 2 — YOUR RESULTS
+Organize tests into categories (Blood Health, Metabolic/Sugar, Cholesterol, Kidney, Liver, Thyroid, Vitamins, Other)
+For each test: show the value, whether it's Normal/High/Low, and the plain-English explanation
+
+SECTION 3 — CALCULATED HEALTH METRICS
+Show derived metrics (eGFR, LDL, BMI, ratios) with their interpretations
+
+SECTION 4 — QUESTIONS TO ASK YOUR DOCTOR
+List 3-5 specific, smart questions based on any abnormal or borderline results.
+Example: "My hemoglobin was low — should I get an iron panel done?"
+
+SECTION 5 — IMPORTANT DISCLAIMER
+"This report is generated by AI for informational purposes only. It does NOT constitute medical advice, diagnosis, or treatment. Always consult a qualified healthcare professional for interpretation of your results."
+
+Make the report clear, empathetic, and actionable.""",
+        agent=architect,
+        expected_output="Complete structured health report with all 5 sections",
+        context=[explain_task],
+    )
+
+    crew = Crew(
+        agents=[explainer, architect],
+        tasks=[explain_task, report_task],
+        process=Process.sequential,
+        verbose=False,
+        cache=False,   # disables crew-level prompt caching -> no cache_breakpoint
+    )
+
+    # Retry with exponential backoff — handles 503/429/empty response from Groq/Gemini
+    last_error = None
+    for attempt in range(1, 4):  # max 3 attempts
+        try:
+            result = crew.kickoff()
+            return str(result)
+        except Exception as e:
+            last_error = e
+            err_str = str(e).lower()
+            is_retryable = any(x in err_str for x in [
+                "503", "unavailable", "429", "exhausted", "empty",
+                "model output", "overloaded", "resource_exhausted",
+                "rate_limit", "rate limit", "timeout", "connection"
+            ])
+            if is_retryable and attempt < 3:
+                wait = 10 * attempt  # 10s, 20s
+                print(f"[RETRY] Attempt {attempt} failed ({str(e)[:60]}...). Retrying in {wait}s...")
+                time.sleep(wait)
+            else:
+                raise last_error
+
+    raise last_error

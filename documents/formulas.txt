@@ -1,0 +1,141 @@
+==============================================================================
+MEDISCAN AI — CLINICAL CALCULATION FORMULAS
+Source: CKD-EPI 2021, Friedewald, WHO, ACC/AHA guidelines
+==============================================================================
+
+--- eGFR (CKD-EPI 2021 Race-Free Creatinine Equation) ---
+
+Formula:
+  eGFR = 142 × min(Scr/κ, 1)^α × max(Scr/κ, 1)^(-1.200) × 0.9938^Age × Sex_factor
+
+Where:
+  Scr = Serum Creatinine in mg/dL
+  κ (kappa) = 0.7 for females, 0.9 for males
+  α (alpha) = -0.241 for females, -0.302 for males
+  Sex_factor = 1.012 for females, 1.0 for males
+  Age = age in years
+
+Units: mL/min/1.73m²
+
+Interpretation:
+  >= 90  → Normal (Stage 1 if kidney damage present)
+  60-89  → Mildly reduced (Stage 2)
+  30-59  → Moderately reduced (Stage 3)
+  15-29  → Severely reduced (Stage 4)
+  < 15   → Kidney failure (Stage 5)
+
+--- LDL Cholesterol (Friedewald Equation) ---
+
+Formula:
+  LDL = Total_Cholesterol - HDL - (Triglycerides / 5)
+
+Units: mg/dL
+Valid only when Triglycerides < 400 mg/dL
+If TG >= 400 mg/dL: use direct LDL measurement
+
+--- VLDL Cholesterol ---
+
+Formula:
+  VLDL = Triglycerides / 5
+
+Units: mg/dL
+Normal range: 5 - 40 mg/dL
+
+--- Non-HDL Cholesterol ---
+
+Formula:
+  Non-HDL = Total_Cholesterol - HDL
+
+Units: mg/dL
+Optimal: < 130 mg/dL
+Includes all atherogenic lipoproteins (LDL + VLDL + IDL)
+
+--- BMI (Body Mass Index) ---
+
+Formula:
+  BMI = Weight_kg / (Height_m)²
+
+Interpretation (WHO):
+  < 18.5   = Underweight
+  18.5-24.9 = Normal weight
+  25.0-29.9 = Overweight
+  30.0-34.9 = Obesity Class I
+  35.0-39.9 = Obesity Class II
+  >= 40.0  = Obesity Class III (Severe)
+
+Asian-specific cutoffs (India/WHO):
+  < 18.5   = Underweight
+  18.5-22.9 = Normal
+  23.0-24.9 = Overweight
+  >= 25.0  = Obese
+
+--- Anion Gap ---
+
+Formula:
+  Anion Gap = Na - (Cl + HCO3)
+
+Normal: 8 - 12 mEq/L
+HIGH = metabolic acidosis (DKA, lactic acidosis, poisoning)
+
+--- Albumin/Globulin Ratio (A/G Ratio) ---
+
+Formula:
+  A/G Ratio = Albumin / Globulin
+  Globulin = Total Protein - Albumin
+
+Normal: 1.1 - 2.5
+LOW A/G = liver disease, chronic inflammation, autoimmune
+
+--- BUN/Creatinine Ratio ---
+
+Formula:
+  BUN/Cr Ratio = BUN / Creatinine
+
+Normal: 10:1 to 20:1
+HIGH (> 20): dehydration, high protein diet, GI bleeding
+LOW (< 10): liver disease, malnutrition, muscle wasting
+
+--- Transferrin Saturation ---
+
+Formula:
+  Transferrin Saturation = (Serum Iron / TIBC) × 100
+
+Normal: 20 - 50 %
+LOW = iron deficiency
+HIGH = iron overload (hemochromatosis)
+
+--- Coronary Risk Ratios ---
+
+Total Cholesterol / HDL Ratio:
+  Optimal: < 4.0
+  Normal: 4.0 - 5.0
+  Elevated risk: > 5.0
+
+LDL / HDL Ratio:
+  Optimal: < 2.5
+  Borderline: 2.5 - 3.5
+  High risk: > 3.5
+
+--- Unit Conversions ---
+
+Glucose:
+  mg/dL → mmol/L: divide by 18.0182
+  mmol/L → mg/dL: multiply by 18.0182
+
+Cholesterol/Lipids:
+  mg/dL → mmol/L: divide by 38.67
+  mmol/L → mg/dL: multiply by 38.67
+
+Creatinine:
+  mg/dL → µmol/L: multiply by 88.42
+  µmol/L → mg/dL: divide by 88.42
+
+HbA1c:
+  % → mmol/mol: (% - 2.15) × 10.929
+  mmol/mol → %: (mmol/mol / 10.929) + 2.15
+
+Vitamin D:
+  ng/mL → nmol/L: multiply by 2.496
+  nmol/L → ng/mL: divide by 2.496
+
+==============================================================================

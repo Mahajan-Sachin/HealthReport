@@ -1,0 +1,41 @@
+name: CI — MediScan AI
+
+on:
+  push:
+    branches: ["main", "dev"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  unit-tests:
+    name: Unit Tests (no API needed)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: ${{ runner.os }}-pip-
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run unit tests
+        run: python -m pytest tests/ -v --tb=short
+        env:
+          # Fake keys so imports don't fail — unit tests never call the APIs
+          GROQ_API_KEY: "fake-key-unit-tests"
+          TAVILY_API_KEY: "fake-key-unit-tests"
+          GENERATOR_MODEL: "meta-llama/llama-3.3-70b-versatile"
+          JUDGE_MODEL: "qwen/qwen3-32b"
+          CREW_MODEL: "groq/meta-llama/llama-4-scout-17b-16e-instruct"

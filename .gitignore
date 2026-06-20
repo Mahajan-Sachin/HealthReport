@@ -1,0 +1,32 @@
+# ─── Environment ──────────────────────────────────────────────────────────────
+.env
+*.env
+
+# ─── Vector DB (NEVER commit — built at runtime) ──────────────────────────────
+chroma_db/
+*.chroma
+embeddings/
+
+# ─── Python Cache ─────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+.pytest_cache/
+
+# ─── Virtual Environments ─────────────────────────────────────────────────────
+venv/
+env/
+.venv/
+
+# ─── Uploaded Files (temp) ────────────────────────────────────────────────────
+uploads/
+temp/
+
+# ─── Generated Reports (temp) ─────────────────────────────────────────────────
+generated_reports/
+
+# ─── IDE ──────────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp

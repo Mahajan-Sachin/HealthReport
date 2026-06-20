@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediScan AI — Lab Report Intelligence</title>
+  <meta name="description" content="AI-powered lab report analyzer. Understand your blood test results in plain English with MediScan AI — powered by LangGraph, CrewAI, and RAG." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── NAV ──────────────────────────────────────────────────────────── -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <span class="brand-icon">⚕️</span>
+      <span class="brand-name">MediScan <span class="brand-ai">AI</span></span>
+    </div>
+    <div class="nav-badge">Multi-Agent Healthcare AI</div>
+  </nav>
+
+  <!-- ── HERO ─────────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+      <div class="hero-tag">🧬 Powered by LangGraph + CrewAI + RAG</div>
+      <h1 class="hero-title">
+        Understand Your <span class="gradient-text">Lab Report</span><br/>
+        In Plain English
+      </h1>
+      <p class="hero-subtitle">
+        Upload your blood test PDF or paste the values. Our AI agents analyze every number,
+        calculate clinical metrics, and explain what it all means — in language your doctor would approve of.
+      </p>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">50+</span><span class="stat-label">Lab Tests Covered</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">6</span><span class="stat-label">AI Agents Working</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">0</span><span class="stat-label">Medical Data Stored</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW IT WORKS ──────────────────────────────────────────────────── -->
+  <section class="how-it-works">
+    <div class="container">
+      <h2 class="section-title">How It Works</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-icon">📤</div>
+          <div class="step-num">01</div>
+          <h3>Upload or Paste</h3>
+          <p>Upload your lab report PDF or paste the text values manually</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step-card">
+          <div class="step-icon">🤖</div>
+          <div class="step-num">02</div>
+          <h3>6 Agents Analyze</h3>
+          <p>Extractor, Calculator, Researcher, Explainer, Judge, and Writer work in sequence</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step-card">
+          <div class="step-icon">📊</div>
+          <div class="step-num">03</div>
+          <h3>Get Your Report</h3>
+          <p>Color-coded results, plain-English explanations, and smart doctor questions</p>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step-card">
+          <div class="step-icon">⬇️</div>
+          <div class="step-num">04</div>
+          <h3>Download PDF</h3>
+          <p>Save your personalized health report to share with your doctor</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MAIN FORM ─────────────────────────────────────────────────────── -->
+  <section class="analyzer-section" id="analyzer">
+    <div class="container">
+      <div class="analyzer-card">
+
+        <!-- Patient Info -->
+        <div class="form-section">
+          <h2 class="form-title">
+            <span class="form-icon">👤</span> Patient Information
+          </h2>
+          <p class="form-subtitle">Required for accurate clinical calculations (eGFR, risk metrics)</p>
+          <div class="patient-fields">
+            <div class="field-group">
+              <label for="patient-name">Full Name</label>
+              <input type="text" id="patient-name" placeholder="Your name" />
+            </div>
+            <div class="field-group">
+              <label for="patient-age">Age <span class="required">*</span></label>
+              <input type="number" id="patient-age" placeholder="e.g. 35" min="1" max="120" required />
+            </div>
+            <div class="field-group">
+              <label for="patient-sex">Biological Sex <span class="required">*</span></label>
+              <select id="patient-sex" required>
+                <option value="">Select...</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Report Input Tabs -->
+        <div class="form-section">
+          <h2 class="form-title">
+            <span class="form-icon">📋</span> Your Lab Report
+          </h2>
+          <div class="tabs">
+            <button class="tab active" id="tab-text" onclick="switchTab('text')">
+              ✏️ Paste Text
+            </button>
+            <button class="tab" id="tab-pdf" onclick="switchTab('pdf')">
+              📄 Upload PDF
+            </button>
+          </div>
+
+          <!-- Text Input -->
+          <div id="panel-text" class="tab-panel active">
+            <textarea
+              id="report-text"
+              placeholder="Paste your lab report here...
+
+Example:
+Hemoglobin: 9.2 g/dL [Reference: 13.5-17.5] H
+WBC: 8500 /µL [Reference: 4000-11000]
+Platelets: 180000 /µL
+Glucose (Fasting): 132 mg/dL [Reference: 70-99] H
+HbA1c: 7.2% [Reference: <5.7%] H
+Creatinine: 1.1 mg/dL [Reference: 0.74-1.35]
+Total Cholesterol: 218 mg/dL
+HDL: 42 mg/dL
+Triglycerides: 195 mg/dL
+TSH: 5.8 mIU/L [Reference: 0.4-4.0] H"
+            ></textarea>
+            <div class="char-count" id="char-count">0 / 15,000 characters</div>
+          </div>
+
+          <!-- PDF Upload -->
+          <div id="panel-pdf" class="tab-panel">
+            <div class="upload-zone" id="upload-zone" onclick="document.getElementById('pdf-input').click()">
+              <input type="file" id="pdf-input" accept=".pdf" style="display:none" onchange="handleFileSelect(this)" />
+              <div class="upload-icon">📁</div>
+              <div class="upload-text">Click to upload or drag & drop</div>
+              <div class="upload-subtext">Digital PDF only · Max 10MB · Any lab format</div>
+            </div>
+            <div id="file-selected" class="file-selected" style="display:none">
+              <span class="file-icon">📄</span>
+              <span id="file-name"></span>
+              <button class="remove-file" onclick="removeFile()">✕</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button class="analyze-btn" id="analyze-btn" onclick="startAnalysis()">
+          <span class="btn-icon">🔬</span>
+          <span class="btn-text">Analyze My Report</span>
+          <span class="btn-arrow">→</span>
+        </button>
+
+        <!-- Disclaimer -->
+        <div class="form-disclaimer">
+          ⚠️ <strong>Not Medical Advice.</strong> This tool explains lab values for informational purposes only.
+          Always consult a qualified healthcare professional for medical decisions.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── LOADING STATE ─────────────────────────────────────────────────── -->
+  <section class="loading-section" id="loading-section" style="display:none">
+    <div class="container">
+      <div class="loading-card">
+        <div class="loading-animation">
+          <div class="pulse-ring"></div>
+          <div class="pulse-core">⚕️</div>
+        </div>
+        <h2 class="loading-title">Analyzing Your Report</h2>
+        <p class="loading-subtitle">6 AI agents are working on your results</p>
+        <div class="agent-pipeline">
+          <div class="agent-step" id="step-1">
+            <div class="agent-dot"></div>
+            <span>🔍 Extracting values</span>
+          </div>
+          <div class="agent-step" id="step-2">
+            <div class="agent-dot"></div>
+            <span>📚 RAG reference lookup</span>
+          </div>
+          <div class="agent-step" id="step-3">
+            <div class="agent-dot"></div>
+            <span>🧮 Clinical calculations</span>
+          </div>
+          <div class="agent-step" id="step-4">
+            <div class="agent-dot"></div>
+            <span>🔎 Researching abnormal values</span>
+          </div>
+          <div class="agent-step" id="step-5">
+            <div class="agent-dot"></div>
+            <span>🤖 CrewAI generating explanations</span>
+          </div>
+          <div class="agent-step" id="step-6">
+            <div class="agent-dot"></div>
+            <span>⚖️ Judge validating accuracy</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── RESULTS ───────────────────────────────────────────────────────── -->
+  <section class="results-section" id="results-section" style="display:none">
+    <div class="container">
+
+      <!-- Results Header -->
+      <div class="results-header">
+        <div class="results-title-group">
+          <h2 class="results-title">Your Health Report</h2>
+          <p class="results-subtitle" id="results-patient-info"></p>
+        </div>
+        <button class="download-btn" id="download-btn" onclick="downloadReport()">
+          ⬇️ Download PDF
+        </button>
+      </div>
+
+      <!-- Summary Cards -->
+      <div class="summary-grid" id="summary-grid"></div>
+
+      <!-- Agent Info Badge -->
+      <div class="agent-badge" id="agent-badge"></div>
+
+      <!-- Full Report -->
+      <div class="report-card" id="report-content"></div>
+
+      <!-- Calculated Metrics -->
+      <div class="metrics-section" id="metrics-section" style="display:none">
+        <h3 class="metrics-title">⚗️ Calculated Clinical Metrics</h3>
+        <div class="metrics-grid" id="metrics-grid"></div>
+      </div>
+
+      <!-- Disclaimer -->
+      <div class="disclaimer-card">
+        <div class="disclaimer-icon">⚠️</div>
+        <div class="disclaimer-text" id="disclaimer-text"></div>
+      </div>
+
+      <!-- Analyze Again -->
+      <div class="analyze-again-wrapper">
+        <button class="analyze-again-btn" onclick="resetAnalyzer()">
+          🔄 Analyze Another Report
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── FOOTER ────────────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-brand">⚕️ MediScan AI</div>
+      <div class="footer-tech">Built with LangGraph · CrewAI · RAG · FastAPI</div>
+      <div class="footer-disclaimer">Not a medical device. For informational purposes only.</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

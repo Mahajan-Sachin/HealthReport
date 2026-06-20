@@ -1,0 +1,29 @@
+# Render.com deployment config
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: mediscan-ai
+    runtime: python
+    region: singapore          # closest to India
+    plan: free                 # free tier (512MB RAM, sleeps after 15min idle)
+
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+
+    # Auto-deploy when main branch is pushed
+    autoDeploy: true
+
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false            # set manually in Render dashboard (secret)
+      - key: TAVILY_API_KEY
+        sync: false            # set manually in Render dashboard (secret)
+      - key: GENERATOR_MODEL
+        value: meta-llama/llama-3.3-70b-versatile
+      - key: JUDGE_MODEL
+        value: qwen/qwen3-32b
+      - key: CREW_MODEL
+        value: groq/meta-llama/llama-4-scout-17b-16e-instruct
+      - key: PYTHON_VERSION
+        value: "3.11"

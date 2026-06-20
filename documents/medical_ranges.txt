@@ -1,0 +1,291 @@
+==============================================================================
+MEDISCAN AI — MEDICAL REFERENCE RANGES (WHO/International Standards)
+Source: WHO, ADA, ACC/AHA, KDIGO, ATS guidelines
+==============================================================================
+
+--- COMPLETE BLOOD COUNT (CBC) ---
+
+Hemoglobin (Hb):
+  Men: 13.5 - 17.5 g/dL
+  Women: 12.0 - 15.5 g/dL
+  Children (6-12 yrs): 11.5 - 15.5 g/dL
+  Pregnant: 11.0 - 14.0 g/dL
+  LOW = Anemia. HIGH = Polycythemia or dehydration.
+
+Red Blood Cell Count (RBC):
+  Men: 4.5 - 5.9 million/µL
+  Women: 4.0 - 5.2 million/µL
+
+Hematocrit (HCT/PCV):
+  Men: 41 - 53 %
+  Women: 36 - 46 %
+
+Mean Corpuscular Volume (MCV):
+  Normal: 80 - 100 fL
+  LOW = Iron deficiency or thalassemia. HIGH = B12/folate deficiency.
+
+Mean Corpuscular Hemoglobin (MCH):
+  Normal: 27 - 33 pg
+
+Mean Corpuscular Hemoglobin Concentration (MCHC):
+  Normal: 32 - 36 g/dL
+
+Red Cell Distribution Width (RDW):
+  Normal: 11.5 - 14.5 %
+
+White Blood Cell Count (WBC/TLC):
+  Normal: 4,000 - 11,000 /µL (or 4.0 - 11.0 x10^9/L)
+  LOW = Immunosuppression, viral infections. HIGH = Infection, inflammation.
+
+Neutrophils (Absolute/Differential):
+  Normal: 50 - 70 % (or 1,800 - 7,700 /µL absolute)
+
+Lymphocytes:
+  Normal: 20 - 40 % (or 1,000 - 4,800 /µL absolute)
+
+Monocytes:
+  Normal: 2 - 8 %
+
+Eosinophils:
+  Normal: 1 - 4 % (HIGH = allergy, parasitic infection)
+
+Basophils:
+  Normal: 0 - 1 %
+
+Platelet Count (PLT):
+  Normal: 150,000 - 400,000 /µL
+  LOW (<150,000) = Thrombocytopenia. HIGH (>400,000) = Thrombocytosis.
+
+--- LIPID PROFILE ---
+
+Total Cholesterol:
+  Desirable: < 200 mg/dL
+  Borderline High: 200 - 239 mg/dL
+  High: >= 240 mg/dL
+  mmol/L equivalent: < 5.2 / 5.2-6.2 / >= 6.2
+
+LDL Cholesterol (Low-Density Lipoprotein — "bad"):
+  Optimal: < 100 mg/dL
+  Near Optimal: 100 - 129 mg/dL
+  Borderline High: 130 - 159 mg/dL
+  High: 160 - 189 mg/dL
+  Very High: >= 190 mg/dL
+
+HDL Cholesterol (High-Density Lipoprotein — "good"):
+  Men: > 40 mg/dL (optimal > 60 mg/dL)
+  Women: > 50 mg/dL (optimal > 60 mg/dL)
+  LOW HDL = increased heart disease risk
+
+Triglycerides:
+  Normal: < 150 mg/dL
+  Borderline High: 150 - 199 mg/dL
+  High: 200 - 499 mg/dL
+  Very High: >= 500 mg/dL
+
+VLDL Cholesterol:
+  Normal: 5 - 40 mg/dL
+
+Non-HDL Cholesterol:
+  Optimal: < 130 mg/dL
+  Calculated as: Total Cholesterol - HDL
+
+--- BLOOD GLUCOSE / DIABETES ---
+
+Fasting Blood Glucose (FBG/FBS):
+  Normal: 70 - 99 mg/dL
+  Prediabetes: 100 - 125 mg/dL
+  Diabetes: >= 126 mg/dL (on two separate occasions)
+  mmol/L: Normal 3.9-5.5 / Prediabetes 5.6-6.9 / Diabetes >=7.0
+
+Postprandial / Post-meal Glucose (2hr PPG):
+  Normal: < 140 mg/dL
+  Prediabetes: 140 - 199 mg/dL
+  Diabetes: >= 200 mg/dL
+
+Random Blood Glucose:
+  Normal: < 140 mg/dL
+  Diabetes (with symptoms): >= 200 mg/dL
+
+HbA1c (Glycated Hemoglobin — 3-month average):
+  Normal: < 5.7 %
+  Prediabetes: 5.7 - 6.4 %
+  Diabetes: >= 6.5 %
+  Well-controlled diabetes target: < 7.0 %
+
+Insulin (Fasting):
+  Normal: 2 - 25 µIU/mL
+
+--- KIDNEY FUNCTION TEST (KFT / RFT) ---
+
+Serum Creatinine:
+  Men: 0.74 - 1.35 mg/dL
+  Women: 0.59 - 1.04 mg/dL
+  HIGH = kidney may not be filtering well
+
+Blood Urea Nitrogen (BUN):
+  Normal: 7 - 20 mg/dL
+  HIGH = kidneys not clearing waste efficiently
+
+BUN/Creatinine Ratio:
+  Normal: 10:1 to 20:1
+
+Uric Acid:
+  Men: 3.4 - 7.0 mg/dL
+  Women: 2.4 - 6.0 mg/dL
+  HIGH = gout risk, kidney stones
+
+eGFR (Estimated Glomerular Filtration Rate — CALCULATED):
+  >= 90 mL/min/1.73m² = Normal kidney function (Stage 1 if with kidney damage)
+  60 - 89 = Mildly reduced (Stage 2)
+  30 - 59 = Moderately reduced (Stage 3 CKD)
+  15 - 29 = Severely reduced (Stage 4 CKD)
+  < 15 = Kidney failure (Stage 5 CKD)
+
+Sodium (Na):
+  Normal: 136 - 145 mmol/L
+  LOW (hyponatremia): dehydration, heart/kidney issues
+
+Potassium (K):
+  Normal: 3.5 - 5.1 mmol/L
+  HIGH (hyperkalemia): kidney disease, dangerous for heart
+
+Chloride (Cl):
+  Normal: 98 - 107 mmol/L
+
+Bicarbonate (HCO3):
+  Normal: 22 - 29 mmol/L
+
+Calcium (Ca):
+  Normal: 8.5 - 10.5 mg/dL (or 2.1 - 2.6 mmol/L)
+
+Phosphorus:
+  Normal: 2.5 - 4.5 mg/dL
+
+--- LIVER FUNCTION TEST (LFT) ---
+
+SGPT / ALT (Alanine Aminotransferase):
+  Men: 7 - 56 U/L
+  Women: 7 - 45 U/L
+  HIGH = liver cell damage (hepatitis, fatty liver, alcohol)
+
+SGOT / AST (Aspartate Aminotransferase):
+  Normal: 10 - 40 U/L
+  HIGH = liver or heart muscle damage
+
+Alkaline Phosphatase (ALP):
+  Normal: 44 - 147 U/L
+  HIGH = bile duct issues, bone disease
+
+Gamma-GT / GGT:
+  Men: 8 - 61 U/L
+  Women: 5 - 36 U/L
+  HIGH = alcohol use, liver/bile issues
+
+Total Bilirubin:
+  Normal: 0.1 - 1.2 mg/dL
+  HIGH = jaundice risk (liver/bile problems)
+
+Direct Bilirubin:
+  Normal: 0.0 - 0.3 mg/dL
+
+Indirect Bilirubin:
+  Normal: 0.2 - 0.9 mg/dL
+
+Total Protein:
+  Normal: 6.0 - 8.3 g/dL
+
+Albumin:
+  Normal: 3.4 - 5.4 g/dL
+  LOW = liver disease, malnutrition, kidney loss
+
+Globulin:
+  Normal: 2.0 - 3.5 g/dL
+
+A/G Ratio (Albumin/Globulin):
+  Normal: 1.1 - 2.5
+
+--- THYROID FUNCTION TEST ---
+
+TSH (Thyroid Stimulating Hormone):
+  Normal: 0.4 - 4.0 mIU/L
+  HIGH TSH = Hypothyroidism (underactive thyroid)
+  LOW TSH = Hyperthyroidism (overactive thyroid)
+
+Free T4 (Thyroxine):
+  Normal: 0.8 - 1.8 ng/dL
+  LOW with HIGH TSH = Hypothyroidism
+
+Free T3 (Triiodothyronine):
+  Normal: 2.3 - 4.1 pg/mL
+
+Total T4:
+  Normal: 4.5 - 12.0 µg/dL
+
+Total T3:
+  Normal: 80 - 200 ng/dL
+
+--- IRON STUDIES ---
+
+Serum Iron:
+  Men: 60 - 170 µg/dL
+  Women: 50 - 170 µg/dL
+
+TIBC (Total Iron Binding Capacity):
+  Normal: 250 - 370 µg/dL
+
+Ferritin:
+  Men: 24 - 336 ng/mL
+  Women: 11 - 307 ng/mL
+  LOW = iron deficiency. HIGH = inflammation/infection.
+
+Transferrin Saturation:
+  Normal: 20 - 50 %
+
+--- VITAMINS ---
+
+Vitamin D (25-OH Vitamin D):
+  Deficient: < 20 ng/mL
+  Insufficient: 20 - 29 ng/mL
+  Sufficient: 30 - 100 ng/mL
+  Toxic: > 100 ng/mL
+
+Vitamin B12 (Cobalamin):
+  Normal: 200 - 900 pg/mL
+  Deficient: < 200 pg/mL (nerve damage risk)
+  Optimal: > 400 pg/mL
+
+Folic Acid / Folate:
+  Normal: 2.7 - 17.0 ng/mL
+  Deficient: < 2.7 ng/mL
+
+--- CARDIAC MARKERS ---
+
+Troponin T (cTnT):
+  Normal: < 0.01 ng/mL (HIGH = heart muscle damage)
+
+CK-MB:
+  Normal: < 5 % of total CK or < 25 U/L
+
+LDH (Lactate Dehydrogenase):
+  Normal: 140 - 280 U/L
+
+CRP (C-Reactive Protein):
+  Normal: < 1.0 mg/L
+  High Sensitivity CRP (hsCRP): < 1.0 low risk, 1.0-3.0 moderate, > 3.0 high cardiovascular risk
+
+--- BLOOD PRESSURE (for reference) ---
+
+Normal: < 120 / < 80 mmHg
+Elevated: 120-129 / < 80 mmHg
+Stage 1 Hypertension: 130-139 / 80-89 mmHg
+Stage 2 Hypertension: >= 140 / >= 90 mmHg
+Hypertensive Crisis: > 180 / > 120 mmHg
+
+--- COMPLETE METABOLIC PANEL (CMP) additional ---
+
+Glucose: see Blood Glucose section
+Sodium, Potassium, Chloride, Bicarbonate: see Kidney Function section
+BUN, Creatinine: see Kidney Function section
+Albumin, Total Protein, ALT, AST, ALP, Bilirubin: see Liver Function section
+
+==============================================================================
