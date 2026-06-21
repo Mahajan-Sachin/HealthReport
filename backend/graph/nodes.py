@@ -102,35 +102,28 @@ def rag_lookup_node(state: MediScanState) -> dict:
     _t0 = time.time()
     print("[RAG] [Node 2] RAG lookup for missing reference ranges...")
 
-    from backend.ingest import get_collection
+    from backend.ingest import get_vectorstore
 
     tests = state.get("extracted_tests", [])
     if not tests:
         return {"rag_enriched_tests": []}
 
     try:
-        collection = get_collection()
+        vectorstore = get_vectorstore()
     except Exception:
-        # If ChromaDB not built yet, return tests as-is
         print("   [WARN]  ChromaDB not ready, skipping RAG enrichment")
-        return {"rag_enriched_tests": tests}
+        return {"rag_enriched_tests": tests, "node_timings": state.get("node_timings") or {}}
 
     enriched = []
     for test in tests:
         t = dict(test)
         if not t.get("reference_range"):
-            # Query ChromaDB for this test's reference range
             query = f"{t['test_name']} normal range reference values"
             try:
-                results = collection.query(
-                    query_texts=[query],
-                    n_results=2,
-                    include=["documents"]
-                )
-                if results["documents"] and results["documents"][0]:
-                    # Take first relevant chunk
+                docs = vectorstore.similarity_search(query, k=2)
+                if docs:
                     t["reference_range"] = _extract_range_from_text(
-                        results["documents"][0][0], t["test_name"]
+                        docs[0].page_content, t["test_name"]
                     )
             except Exception:
                 pass
@@ -226,7 +219,7 @@ def _infer_flag(test: dict) -> str:
     return ""
 
 
-# ─── NODE 4: Researcher ───────────────────────────────────────────────────────
+# ─── NODE 4: Researcher ──────────────────────────────────────────────────────
 
 def research_node(state: MediScanState) -> dict:
     """
@@ -267,7 +260,7 @@ def research_node(state: MediScanState) -> dict:
     return {"research_context": context, "node_timings": timings}
 
 
-# ─── NODE 5: Judge (Qwen) ─────────────────────────────────────────────────────
+# ─── NODE 5: Judge (Qwen) ───────────────────────────────────────────────────
 
 def judge_node(state: MediScanState) -> dict:
     """

@@ -14,7 +14,7 @@ os.environ["LITELLM_CACHE"] = "False"
 os.environ["LITELLM_DROP_PARAMS"] = "True"
 os.environ["CREWAI_DISABLE_CACHE"] = "True"
 
-# ── Monkey-patch fix for CrewAI cache_breakpoint bug ──────────────────────────
+# ── Monkey-patch fix for CrewAI cache_breakpoint bug ─────────────────────────-
 # CrewAI injects cache_breakpoint into messages (Anthropic-only feature).
 # Groq rejects it with 400 error. This patch makes mark_cache_breakpoint a no-op.
 # Source: CrewAI community fix for v1.14.4 bug
