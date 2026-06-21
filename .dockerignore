@@ -1,0 +1,45 @@
+# ─── Never send these to Docker build context ─────────────────────────────────
+
+# Secrets — never in image
+.env
+*.env
+
+# Vector DB — rebuilt at container startup by ingest_documents()
+chroma_db/
+
+# Python cache — not needed in image
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+*.egg-info/
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+
+# Git
+.git/
+.gitignore
+
+# Test files — not needed in production image
+tests/
+test_pipeline.py
+
+# Generated/temp files
+uploads/
+temp/
+generated_reports/
+metrics.jsonl
+
+# Docs/CI config — not needed in image
+*.md
+.github/
+render.yaml

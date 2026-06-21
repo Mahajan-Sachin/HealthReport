@@ -1,8 +1,20 @@
+---
+title: MediScan AI
+emoji: 🩺
+colorFrom: blue
+colorTo: purple
+sdk: docker
+app_port: 7860
+pinned: false
+short_description: AI-powered lab report analyzer — LangGraph + CrewAI + RAG
+---
+
 # MediScan AI 🩺
 
 > **AI-powered lab report analysis pipeline** — Upload a blood test PDF or paste raw lab values, get a plain-English health report written by 6 AI agents, validated by a judge model, and downloadable as a PDF.
 
-![CI](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/ci.yml/badge.svg)
+
+![CI](https://github.com/Mahajan-Sachin/HealthReport/actions/workflows/ci.yml/badge.svg)
 ![Python](https://img.shields.io/badge/python-3.11-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
@@ -131,7 +143,7 @@ UltimateAiProject/
 ### 1. Clone & Install
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/mediscan-ai.git
+git clone https://github.com/Mahajan-Sachin/HealthReport.git
 cd mediscan-ai
 
 conda create -n langgraph_env python=3.11
