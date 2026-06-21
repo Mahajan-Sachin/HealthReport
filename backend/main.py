@@ -7,6 +7,7 @@ Runs ingest on startup to build ChromaDB.
 import os
 import uuid
 import asyncio
+import hashlib
 from pathlib import Path
 from datetime import datetime
 from contextlib import asynccontextmanager
@@ -22,6 +23,21 @@ load_dotenv()
 
 # In-memory report store (replaced by DB in production)
 report_store: dict = {}
+
+# ── Scalability: limit concurrent analyses to avoid Groq rate limits ──────────
+# Semaphore allows max 3 simultaneous analyses — any more wait in queue
+_analysis_semaphore = asyncio.Semaphore(3)
+
+# ── Simple in-memory cache: identical report → skip full pipeline ─────────────
+# Key: MD5 hash of report text + age + sex (12 chars)
+# Value: the full analysis result dict
+_result_cache: dict = {}
+
+
+def _get_cache_key(report_text: str, patient_age: int, patient_sex: str) -> str:
+    """MD5 hash of report content + demographics. Used as cache lookup key."""
+    content = f"{report_text.strip()}{patient_age}{patient_sex.lower()}"
+    return hashlib.md5(content.encode()).hexdigest()[:12]
 
 
 # ─── Startup: Build ChromaDB + Graph ─────────────────────────────────────────
@@ -106,19 +122,35 @@ async def analyze_text(request: TextAnalysisRequest):
 
     report_id = str(uuid.uuid4())[:8]
 
+    # ── Cache check — skip pipeline if identical report was analyzed before ──
+    cache_key = _get_cache_key(request.report_text, request.patient_age, request.patient_sex)
+    if cache_key in _result_cache:
+        print(f"[CACHE] Hit for key {cache_key} — returning cached result")
+        cached = dict(_result_cache[cache_key])
+        cached["report_id"] = report_id
+        cached["generated_at"] = datetime.now().isoformat()
+        report_store[report_id] = cached
+        return AnalysisResponse(
+            report_id=report_id,
+            status="success",
+            message=f"Analysis complete (cached). {cached.get('summary', {}).get('total_tests', 0)} tests analyzed."
+        )
+
     try:
         from backend.graph.graph import run_analysis
-        # Run synchronous analysis in thread pool — avoids CrewAI/FastAPI event loop conflict
-        report = await asyncio.to_thread(
-            run_analysis,
-            request.report_text,
-            request.patient_name,
-            request.patient_age,
-            request.patient_sex.lower(),
-        )
+        # ── Semaphore: max 3 concurrent analyses — prevents Groq rate limit ──
+        async with _analysis_semaphore:
+            report = await asyncio.to_thread(
+                run_analysis,
+                request.report_text,
+                request.patient_name,
+                request.patient_age,
+                request.patient_sex.lower(),
+            )
         report["report_id"] = report_id
         report["generated_at"] = datetime.now().isoformat()
         report_store[report_id] = report
+        _result_cache[cache_key] = report   # store in cache for future hits
 
         return AnalysisResponse(
             report_id=report_id,
@@ -170,19 +202,35 @@ async def analyze_pdf(
 
     report_id = str(uuid.uuid4())[:8]
 
+    # ── Cache check ──────────────────────────────────────────────────────────
+    cache_key = _get_cache_key(report_text, patient_age, patient_sex)
+    if cache_key in _result_cache:
+        print(f"[CACHE] Hit for key {cache_key} — returning cached result")
+        cached = dict(_result_cache[cache_key])
+        cached["report_id"] = report_id
+        cached["generated_at"] = datetime.now().isoformat()
+        report_store[report_id] = cached
+        return AnalysisResponse(
+            report_id=report_id,
+            status="success",
+            message=f"PDF analyzed (cached). {cached.get('summary', {}).get('total_tests', 0)} tests found."
+        )
+
     try:
         from backend.graph.graph import run_analysis
-        # Run synchronous analysis in thread pool — avoids CrewAI/FastAPI event loop conflict
-        report = await asyncio.to_thread(
-            run_analysis,
-            report_text,
-            patient_name,
-            patient_age,
-            patient_sex.lower(),
-        )
+        # ── Semaphore: max 3 concurrent analyses ──────────────────────────────
+        async with _analysis_semaphore:
+            report = await asyncio.to_thread(
+                run_analysis,
+                report_text,
+                patient_name,
+                patient_age,
+                patient_sex.lower(),
+            )
         report["report_id"] = report_id
         report["generated_at"] = datetime.now().isoformat()
         report_store[report_id] = report
+        _result_cache[cache_key] = report   # store in cache
 
         return AnalysisResponse(
             report_id=report_id,
