@@ -39,10 +39,11 @@ class JudgeOutput(BaseModel):
 # ─── Helper: Initialize ChatGroq ─────────────────────────────────────────────
 
 def get_llm(model_env_key: str = "GENERATOR_MODEL", temperature: float = 0.0) -> ChatGroq:
+    model_name = os.environ[model_env_key].strip()  # .strip() guards against trailing \n from env vars
     return ChatGroq(
-        model=os.environ[model_env_key],
+        model=model_name,
         temperature=temperature,
-        api_key=os.environ["GROQ_API_KEY"],
+        api_key=os.environ["GROQ_API_KEY"].strip(),
         max_tokens=4096,
     )
 
